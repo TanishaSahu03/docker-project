@@ -1,0 +1,19 @@
+name : CI/CD
+
+on:
+  push : [master]
+  pull-request: [master]
+
+jobs:
+  firstjob:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name : checkout action
+        uses : actions/checkout@v3
+
+      - name : docker build
+        uses : docker build -t docker-project .
+
+      - name: run test
+        uses : doker run docker-project pytest
